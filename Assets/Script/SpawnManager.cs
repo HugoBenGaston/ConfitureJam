@@ -33,6 +33,7 @@ public class SpawnManager : MonoBehaviour
     {
         GameObject NewSeed = Instantiate(SeedPrefab, SpawnLocation);
         NewSeed.GetComponent<SphereMovement>().ActiveSeed = true;
+        NewSeed.GetComponent<SphereMovement>().plantsManager = GetComponent<PlantsJauge>();
         VirtualCamera.LookAt = NewSeed.transform;
         VirtualCamera.Follow = NewSeed.transform;
         

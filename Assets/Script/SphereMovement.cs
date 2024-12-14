@@ -16,7 +16,7 @@ public class SphereMovement : MonoBehaviour
     }
 
     
-    void FixedUpdate()
+    void Update()
     {
         if (ActiveSeed)
         {
@@ -24,11 +24,6 @@ public class SphereMovement : MonoBehaviour
             float horizontal = Input.GetAxis("Horizontal");
  
             float vertical = Input.GetAxis("Vertical");
-
-            if (Input.GetKeyDown(KeyCode.Space) && Onground)
-            {
-                rb.AddForce(Vector3.up * jumpForce);
-            } 
 
             //assuming we only using the single camera:
             var camera = Camera.main;
@@ -48,6 +43,10 @@ public class SphereMovement : MonoBehaviour
 
             rb.AddForce(desiredMoveDirection  * speed);
 
+            if (Input.GetKeyDown(KeyCode.Space) && Onground)
+            {
+                rb.AddForce(Vector3.up * jumpForce);
+            }
         }
         
     }
