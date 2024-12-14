@@ -8,30 +8,48 @@ public class SphereMovement : MonoBehaviour
     public float jumpForce;
     private Rigidbody rb;
     public bool Onground = true;
-
+    public bool ActiveSeed;
+    public PlantsJauge plantsManager;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
     
-    void Update()
+    void FixedUpdate()
     {
-        if (Input.GetAxis("Horizontal")!= 0) 
+        if (ActiveSeed)
         {
+
             float horizontal = Input.GetAxis("Horizontal");
-            rb.AddForce((Vector3.right * horizontal)*speed);
+ 
+            float vertical = Input.GetAxis("Vertical");
+
+            if (Input.GetKeyDown(KeyCode.Space) && Onground)
+            {
+                rb.AddForce(Vector3.up * jumpForce);
+            } 
+
+            //assuming we only using the single camera:
+            var camera = Camera.main;
+
+            //camera forward and right vectors:
+            var forward = camera.transform.forward;
+            var right = camera.transform.right;
+
+            //project forward and right vectors on the horizontal plane (y = 0)
+            forward.y = 0f;
+            right.y = 0f;
+            forward.Normalize();
+            right.Normalize();
+
+            //this is the direction in the world space we want to move:
+            var desiredMoveDirection = forward * vertical + right * horizontal;
+
+            rb.AddForce(desiredMoveDirection  * speed);
+
         }
         
-        if (Input.GetAxis("Vertical")!= 0) 
-        {
-            float vertical = Input.GetAxis("Vertical");
-            rb.AddForce((Vector3.forward * vertical)*speed);
-        }
-        if (Input.GetKeyDown(KeyCode.Space) && Onground)
-        {
-            rb.AddForce(Vector3.up * jumpForce);
-        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -39,6 +57,16 @@ public class SphereMovement : MonoBehaviour
         if (collision.transform.tag == "Ground")
         {
             Onground = true ;
+        }
+        if(collision.transform.tag == "Water") 
+        {
+            plantsManager.AddWater(1);
+        
+        }
+        if (collision.transform.tag == "Sun")
+        {
+            plantsManager.AddSun(1);
+
         }
     }
 
@@ -48,5 +76,7 @@ public class SphereMovement : MonoBehaviour
         {
             Onground=false ;
         }
+
+
     }
 }
