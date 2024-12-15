@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Ground
+  - Sun
+  - Water
   layers:
   - Default
   - TransparentFX

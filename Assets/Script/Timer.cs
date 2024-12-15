@@ -11,13 +11,9 @@ public class Timer : MonoBehaviour
     
     public float minutes;
     public float secondes;
-
-    private void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    public GameObject endTab;
+    public Score scoreManager;
+   
     void Update()
     {
         minusOneSecond();
@@ -43,7 +39,7 @@ public class Timer : MonoBehaviour
 
     void TimeUP() 
     {
-    
-    
+        endTab.SetActive(true);
+        endTab.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = scoreManager.score.ToString();
     }
 }

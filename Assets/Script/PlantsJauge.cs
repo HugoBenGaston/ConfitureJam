@@ -30,6 +30,7 @@ public class PlantsJauge : MonoBehaviour
         if (WaterLevel == 10) 
         {
             FullWater = true;
+            CheckFull();
         }
     }
 
@@ -41,7 +42,7 @@ public class PlantsJauge : MonoBehaviour
         if (SunLevel == 10) 
         {
             FullSun = true;
-        
+            CheckFull();
         }
     
     }

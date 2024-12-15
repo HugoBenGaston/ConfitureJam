@@ -11,6 +11,7 @@ public class SpawnManager : MonoBehaviour
     public GameObject previousSeed;
     public GameObject cam;
     bool FirstSpawn = true;
+    public Score scoreManager;
 
     public bool TestSpawn = false;
 
@@ -52,5 +53,7 @@ public class SpawnManager : MonoBehaviour
             previousSeed = NewSeed;
         
         }
+        scoreManager.addScore(10);
+
     }
 }
