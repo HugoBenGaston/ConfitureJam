@@ -68,11 +68,12 @@ public class PlantsJauge : MonoBehaviour
         SunLevel = 0;
         Waterjauge.value = WaterLevel;
         Sunjauge.value = SunLevel;
+        CanPlantText.SetActive(false);
     }
 
     void Plant() 
     {
-        GetComponent<SpawnManager>().SpawnNewSeed();
+        GetComponent<SpawnManager>().PlantOldSeed();
     
     }
 }

@@ -12,7 +12,9 @@ public class SphereMovement : MonoBehaviour
     public PlantsJauge plantsManager;
     public bool inTheSun;
     public bool inTheWater;
+    public bool inFlowerRange;
     public float jaugeTimer;
+    public Animator animator;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -64,6 +66,11 @@ public class SphereMovement : MonoBehaviour
             inTheSun = true;
 
         }
+        if (other.transform.tag == "Flower")
+        {
+            inFlowerRange = true;
+
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -76,6 +83,11 @@ public class SphereMovement : MonoBehaviour
         if (other.transform.tag == "Sun")
         {
             inTheSun = false;
+
+        }
+        if (other.transform.tag == "Flower")
+        {
+            inFlowerRange = false;
 
         }
     }
@@ -120,5 +132,20 @@ public class SphereMovement : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce);
         }
 
+    }
+
+
+    public void Plant() 
+    {
+        transform.eulerAngles = new Vector3(-90f,0f,0f);
+        animator.enabled = true;    
+        animator.SetBool("Plant", true);
+    
+    }
+
+    public void CallPlant() 
+    {
+        plantsManager.GetComponent<SpawnManager>().SpawnNewSeed();
+    
     }
 }

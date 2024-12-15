@@ -41,11 +41,10 @@ public class SpawnManager : MonoBehaviour
 
         if (!FirstSpawn)
         {
-            previousSeed.GetComponent<SphereMovement>().ActiveSeed = false;
-            previousSeed.GetComponent<Rigidbody>().detectCollisions = false;
-            previousSeed.GetComponent<Rigidbody>().useGravity = false;
+            
             previousSeed = NewSeed;
             GetComponent<PlantsJauge>().Reset();
+            scoreManager.addScore(10);
         }
         else 
         {
@@ -53,7 +52,22 @@ public class SpawnManager : MonoBehaviour
             previousSeed = NewSeed;
         
         }
-        scoreManager.addScore(10);
+        
+
+    }
+
+    public void PlantOldSeed() 
+    {
+        Rigidbody rb = previousSeed.GetComponent<Rigidbody>();
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+        previousSeed.GetComponent<SphereMovement>().ActiveSeed = false;
+        rb.detectCollisions = false;
+        rb.useGravity = false;
+        
+        
+        previousSeed.GetComponent<SphereMovement>().Plant();
+        VirtualCamera.LookAt = null;
 
     }
 }

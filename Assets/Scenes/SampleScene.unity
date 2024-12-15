@@ -1903,7 +1903,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c91ec0d7ea14f34189e86383c174a79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SeedPrefab: {fileID: 3091427636002055443, guid: 81cef8d1c301d764a87050de3335a8bf, type: 3}
+  SeedPrefab: {fileID: 6128738315350423866, guid: 5f97b7630d5160749b5fa794d9b4e872, type: 3}
   SpawnLocation: {fileID: 1628034983}
   VirtualCamera: {fileID: 288190300}
   previousSeed: {fileID: 0}
