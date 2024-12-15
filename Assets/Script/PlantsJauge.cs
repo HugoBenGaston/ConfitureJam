@@ -73,7 +73,9 @@ public class PlantsJauge : MonoBehaviour
 
     void Plant() 
     {
-        GetComponent<SpawnManager>().PlantOldSeed();
-    
+        if (!GetComponent<SpawnManager>().previousSeed.GetComponent<SphereMovement>().inFlowerRange)
+        {
+            GetComponent<SpawnManager>().PlantOldSeed();
+        }
     }
 }

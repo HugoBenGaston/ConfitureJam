@@ -6,10 +6,11 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject SeedPrefab;
-    public Transform SpawnLocation;
+    public List<Transform> Spawnables = new List<Transform>();
+  
     public CinemachineVirtualCamera VirtualCamera;
     public GameObject previousSeed;
-    public GameObject cam;
+  
     bool FirstSpawn = true;
     public Score scoreManager;
 
@@ -32,7 +33,8 @@ public class SpawnManager : MonoBehaviour
 
     public void SpawnNewSeed() 
     {
-        GameObject NewSeed = Instantiate(SeedPrefab, SpawnLocation);
+        Transform newSpawnpoint = Spawnables[Random.Range(0, Spawnables.Count)]; 
+        GameObject NewSeed = Instantiate(SeedPrefab, newSpawnpoint);
         NewSeed.GetComponent<SphereMovement>().ActiveSeed = true;
         NewSeed.GetComponent<SphereMovement>().plantsManager = GetComponent<PlantsJauge>();
         VirtualCamera.LookAt = NewSeed.transform;
