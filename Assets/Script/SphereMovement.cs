@@ -15,6 +15,7 @@ public class SphereMovement : MonoBehaviour
     public bool inFlowerRange;
     public float jaugeTimer;
     public Animator animator;
+    public AudioSource JumpSound;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -130,6 +131,7 @@ public class SphereMovement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && Onground)
         {
             rb.AddForce(Vector3.up * jumpForce);
+            JumpSound.Play();
         }
 
     }
