@@ -72,4 +72,9 @@ public class SpawnManager : MonoBehaviour
         VirtualCamera.LookAt = null;
 
     }
+
+    public void DeactivatePlayer() 
+    {
+        previousSeed.GetComponent<SphereMovement>().ActiveSeed = false;
+    }
 }
